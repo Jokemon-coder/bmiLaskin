@@ -43,7 +43,7 @@ namespace bmiLaskin
 
             //Luodaan luku, jonka arvo on BMI-laskun tulos. Valmis luku lisätään listan perälle
             double bmiLuku = painoLasku / (pituusLasku * pituusLasku); 
-            bmiLista.Add(bmiLuku);
+            bmiLista.Add(bmiLuku);   
 
             Console.Clear();
             Console.WriteLine($"Sinun BMI-indeksisi on {bmiLuku}");
