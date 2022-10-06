@@ -15,7 +15,8 @@ namespace bmiLaskin
             Console.WriteLine("Valitse 1, jos haluat päästä laskuriin.");
             Console.WriteLine("Valitse 2, jos haluat päästä historiaan.");
             Console.WriteLine("Lisää valitsemasi luku ja paina ENTER:");
-            int luku = Convert.ToInt32(Console.ReadLine()); //Tarkistetaan käyttäjän syöttämä luku ja mennään tiettyyn osioon ohjelmassa sen perusteella. Jos on väärä arvo, ohjelma menee alkuun.
+            double luku = Convert.ToDouble(Console.ReadLine()); //Pitää saada toimimaan järkevästi niin, että ottaa vastaan vain 1 tai 2 ja muut heittää alkuun!!
+                         
             if (luku == 1)
             {
                 Console.Clear();
@@ -64,7 +65,7 @@ namespace bmiLaskin
             double painoLasku = Convert.ToDouble(paino);
 
             //Luodaan luku, jonka arvo on BMI-laskun tulos. Valmis luku lisätään listan perälle
-            double bmiLuku = painoLasku / (pituusLasku * pituusLasku); 
+            double bmiLuku = painoLasku / (pituusLasku * pituusLasku);
             bmiLista.Add(bmiLuku);
 
             Console.Clear();
@@ -82,7 +83,7 @@ namespace bmiLaskin
                 bmilista:
                 Console.Clear();
                 foreach (double bmi in bmiLista)
-                {
+                {          
                     Console.WriteLine(bmiLista.IndexOf(bmi) + " " + $"BMI: {bmi}\n");
                 }
                 Console.WriteLine("Voit poistaa laskuja historiasta kirjoittamalla niiden ID-luvun ja painamalla ENTER. Voit poistua takaisin alkuuen painamalla ESC.");
