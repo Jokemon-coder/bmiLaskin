@@ -15,14 +15,14 @@ namespace bmiLaskin
             Console.WriteLine("Valitse 1, jos haluat päästä laskuriin.");
             Console.WriteLine("Valitse 2, jos haluat päästä historiaan.");
             Console.WriteLine("Lisää valitsemasi luku ja paina ENTER:");
-            double luku = Convert.ToDouble(Console.ReadLine()); //Pitää saada toimimaan järkevästi niin, että ottaa vastaan vain 1 tai 2 ja muut heittää alkuun!!
+            string luku = Console.ReadLine(); //Pitää saada toimimaan järkevästi niin, että ottaa vastaan vain 1 tai 2 ja muut heittää alkuun!!
                          
-            if (luku == 1)
+            if (luku == "1")
             {
                 Console.Clear();
                 goto pituus;
             }
-            else if (luku == 2)
+            else if (luku == "2")
             {
                 Console.Clear();
                 goto historia;
@@ -80,56 +80,64 @@ namespace bmiLaskin
             }
             else if (Console.ReadKey().Key == ConsoleKey.Enter)
             {
-                bmilista:
-                Console.Clear();
-                foreach (double bmi in bmiLista)
-                {          
-                    Console.WriteLine(bmiLista.IndexOf(bmi) + " " + $"BMI: {bmi}\n");
-                }
-                Console.WriteLine("Voit poistaa laskuja historiasta kirjoittamalla niiden ID-luvun ja painamalla ENTER. Voit poistua takaisin alkuuen painamalla ESC.");
-                //Syöttämä luku poistaa samanlukuisella indeksillä olevan esineen listasta. Nyt se vain poistaa sen ja näyttää päivitetyn listan. Pitää olla niin että voi joko poistaa tai mennä takaisin ohjelman alkuun.
-                //Lisää myös alkuun mahdollisuus katsoa historiaa. Hoidettu
-                /*Jostain syystä lisää samanarvoiset BMI-arvot samoilla indekseillä listassa ja ne näkyy samana lukuna konsolissa. Pitää korjata. Tämä kun tapahtuu niin sanoo että väärä arvo on lisätty, vaikka olisi oikea.
-                 *En tiedä mistä johtuu, mutta arvaisin sen liittyvän try-catchiin ja goto-lausekkeisiin. Pitää selvittää!!
-                
-                */
-                if (Console.ReadKey().Key == ConsoleKey.Escape)
+                if (bmiLista.Count == 0)
                 {
+                    Console.WriteLine("Et voi katsoa historiaa, koska sitä ei vielä ole. Paina ESC palataksesi alkuun!");
+                    Console.ReadKey(Console.ReadKey().Key == ConsoleKey.Escape);
                     goto alku;
                 }
-                muutto:
-                int bmiID;
-                try
+                else
                 {
-                    bmiID = Convert.ToInt32(Console.ReadLine());
-                } 
-                catch
-                {
-                    Console.WriteLine("Syötit väärän arvon, yritä uudelleen:");
-                    goto muutto;
-                }
-                Console.Clear();
-                foreach (double bmi in bmiLista)
-                {
-                    Console.WriteLine(bmiLista.IndexOf(bmi) + " " + $"BMI: {bmi}\n");
-                }
-                try
-                {
-                    bmiLista.RemoveAt(bmiID);
-                }
-                catch
-                {
-                    Console.WriteLine("Antamaasi arvoa ei löydy listalta, yritä uudelleen:");
-                    goto muutto;
-                }
-                goto bmilista;
-                /*Console.Clear();
-                foreach (double bmi in bmiLista)
-                {
-                    Console.WriteLine(bmiLista.IndexOf(bmi) + " " + $"BMI: {bmi}\n");
-                }*/
-                
+                bmilista:
+                    Console.Clear();
+                    foreach (double bmi in bmiLista)
+                    {
+                        Console.WriteLine(bmiLista.IndexOf(bmi) + " " + $"BMI: {bmi}\n");
+                    }
+                    Console.WriteLine("Voit poistaa laskuja historiasta kirjoittamalla niiden ID-luvun ja painamalla ENTER. Voit poistua takaisin alkuuen painamalla ESC.");      
+                    //Lisää myös alkuun mahdollisuus katsoa historiaa. Pitää päästä alkuun. Hoidettu
+                    //Try-Catch antaa väärä arvo viestin, vaikka olisi oikein ja menee vasta seuraavalla yrityksellä läpi. Selvitä!!
+                    /*Jostain syystä lisää samanarvoiset BMI-arvot samoilla indekseillä listassa ja ne näkyy samana lukuna konsolissa. Pitää korjata. Tämä kun tapahtuu niin sanoo että väärä arvo on lisätty, vaikka olisi oikea.
+                     *En tiedä mistä johtuu, mutta arvaisin sen liittyvän try-catchiin ja goto-lausekkeisiin. Pitää selvittää!!
 
+                    */
+                    if (Console.ReadKey().Key == ConsoleKey.Escape)
+                    {
+                        goto alku;
+                    }
+                muutto:
+                    int bmiID;
+                    try
+                    {
+                        bmiID = Convert.ToInt32(Console.ReadLine());
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Syötit väärän arvon, yritä uudelleen:");
+                        goto muutto;
+                    }
+                    Console.Clear();
+                    foreach (double bmi in bmiLista)
+                    {
+                        Console.WriteLine(bmiLista.IndexOf(bmi) + " " + $"BMI: {bmi}\n");
+                    }
+                    try
+                    {
+                        bmiLista.RemoveAt(bmiID);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Antamaasi arvoa ei löydy listalta, yritä uudelleen:");
+                        goto muutto;
+                    }
+                    goto bmilista;
+                    /*Console.Clear();
+                    foreach (double bmi in bmiLista)
+                    {
+                        Console.WriteLine(bmiLista.IndexOf(bmi) + " " + $"BMI: {bmi}\n");
+                    }*/
+
+                }
             }
 
             
